@@ -5,14 +5,15 @@ import json
 
 class Lifx:
 
-    def __init__(self, no_blink=False):
+    def __init__(self, no_blink=False, use_light_list=True):
         light_macs = json.load(open('light_macs.json', 'r')).get('lights')
         lan = LifxLAN()
 
-        if light_macs is None:
+        if light_macs is None or not use_light_list:
             self.lights = lan.get_lights()
         else:
-            self.lights = filter(lambda x: x.mac_addr in [mac['mac'] for mac in light_macs], lan.get_lights())
+            self.lights = [Light(mac['mac'], mac['ip']) for mac in light_macs]
+            #self.lights = filter(lambda x: x.mac_addr in [mac['mac'] for mac in light_macs], lan.get_lights())
 
         self.prev_light_power_color = self.store_power_color()
         if not no_blink:
@@ -40,8 +41,15 @@ class Lifx:
 
     def alarm(self, n=5):
         print "Lifx Alarm"
+        self.blink_color((33, 55049, 19660, 2500), n)
+
+    def notify(self, n=1):
+        print "Lifx notify"
+        self.blink_color((19848, 35388, 22937, 2500), n)
+
+    def blink_color(self, color, n=1):
         self.store_power_color()
-        self.set_color((33, 55049, 19660, 2500))
+        self.set_color(color)
 
         for i in range(0, n):
             self.set_power(0)
@@ -66,5 +74,5 @@ class Lifx:
 
 
 if __name__ == "__main__":
-    lifx = Lifx()
+    lifx = Lifx(use_light_list=False)
     import pdb; pdb.set_trace()
