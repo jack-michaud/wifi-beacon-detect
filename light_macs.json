@@ -1,8 +1,9 @@
 {
 	"lights": [
 		{
-			"mac": "d0:73:d5:ff:ff:ff",
-			"name": "Test Light"
+			"mac": "d0:73:d5:13:64:e1",
+			"name": "Test Light",
+			"ip": "10.0.0.189"
 		}
 	]
 }
