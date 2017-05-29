@@ -1,3 +1,4 @@
 lifxlan==1.0.2
 scapy==2.3.3
+requests==2.16.5
 
