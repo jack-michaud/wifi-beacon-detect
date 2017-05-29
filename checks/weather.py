@@ -37,13 +37,13 @@ class Task:
         print "Setting weather color: " + str(temp) + " degrees"
 
         if temp < 32:
-            lifx.set_color(self.ICE)
+            lifx.set_color(self.BLUE)
             return
         if temp < 40:
             lifx.set_color(self.LIGHT_BLUE)
             return
-        if temp < 50:
-            lifx.set_color(self.BLUE)
+        if temp < 55:
+            lifx.set_color(self.ICE)
             return
         if temp < 60:
             lifx.set_color(self.YELLOW)

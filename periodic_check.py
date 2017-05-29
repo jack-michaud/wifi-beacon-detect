@@ -11,7 +11,8 @@ $ python periodic_check.py [morning|afternoon|night]
 if __name__ == "__main__":
 
     lifx = Lifx()
-    time = sys.argv[2]
+    lifx.turn_on()
+    time = sys.argv[1]
 
     settings = {
         "time": time
